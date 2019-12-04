@@ -1,0 +1,21 @@
+##Script de conexao com powershell com servidor linux sem OpenSSH
+##DataCriação: 04/12/2019
+##Versao: 1.1
+##Pre-Requisito: PowerShell 4.0
+
+##Instala Modulo Posh-SSH
+Install-Module -Name Posh-SSH
+##Conecta
+  $credential = Get-Credential
+
+##Copia Diretório
+  Get-SCPFolder -ComputerName '<hostDestino>' -Credential $credential -LocalFolder '<diretorioOrigem>' -RemoteFolder '<diretórioDestino>'
+
+##Executa
+ssh <usuario@ipServidorouMaquinaDestino> -p <porta>; 
+  echo "Alterando Permissão de Diretório Destino"; 
+  chmod -R 777 <diretórioDestino>; 
+  echo "Navegando até diretório destino"; 
+  cd <diretorioDestino>; 
+  echo "Executando arquivo *.sh de instalação"; 
+  sudo .\<nomearquivo.sh>
